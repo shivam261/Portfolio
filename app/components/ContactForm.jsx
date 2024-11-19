@@ -66,7 +66,7 @@ const ContactForm = () => {
   return (
     <div className="mx-auto max-w-xl p-4">
       <Toaster />
-      <h2 className="my12 text-center text-2xl font-semibold uppercase tracking-wide text-slate-100">
+      <h2 className="my12 text-center text-2xl font-semibold uppercase mb-4 tracking-wide text-slate-100">
         Get in Touch{" "}
       </h2>
       <form onSubmit={handleSubmit}>

@@ -3,11 +3,16 @@ import Image from "next/image";
 import Profilepic from "../../public/patrickBravo.jpeg";
 import { PROFILE } from "../constants";
 import { FaDownload } from "react-icons/fa6";
-
+import { motion } from "framer-motion";
 const ProfileOverview = () => {
   return (
     <div className="my-24">
-      <div className="flex flex-col  items-center justify-center gap-4">
+      <motion.div
+        initial={{ opacity: 0, y: -100 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.5 }}
+        className="flex flex-col  items-center justify-center gap-4"
+      >
         <Image
           src={Profilepic}
           width={110}
@@ -33,7 +38,16 @@ const ProfileOverview = () => {
           className="my-10 text-center text-5xl font-semibold
 tracking-tighter lg:text-[10rem]"
         >
-          {PROFILE.greet}
+          {PROFILE.greet.split("").map((char, index) => (
+            <motion.span
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: index * 0.07 }}
+            >
+              {char}
+            </motion.span>
+          ))}
         </p>
         <p className="mb-10 max-w-2xl p-1 text-center text-xl tracking-tight text-slate-400 lg:text-3xl">
           I am a passionate{" "}
@@ -50,7 +64,7 @@ tracking-tighter lg:text-[10rem]"
           development ensuring a cohevsei and efficient user experiance from
           start to finish.
         </p>
-      </div>
+      </motion.div>
     </div>
   );
 };
