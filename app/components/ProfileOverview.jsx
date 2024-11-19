@@ -17,6 +17,7 @@ const ProfileOverview = () => {
         />
         <h1 className="text-2xl font-bold ">{PROFILE.name}</h1>
         <p className="tracking-tighter">{PROFILE.city}</p>
+        <p className="tracking-tighter">{PROFILE.email}</p>
         <a
           href="/patrick.pdf"
           target="_blank"

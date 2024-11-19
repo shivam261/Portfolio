@@ -1,6 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import emailjs from "@emailjs/browser";
+
 const ContactForm = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -36,12 +38,17 @@ const ContactForm = () => {
     } else {
       setErrors({});
       setIsSending(true);
-      EmailJSResponseStatus.send(
-        "service_vfcqsvr",
-        "template_yqly2d7",
-        formData,
-        "GOxvzU9_EUyp8rZFS"
-      )
+      emailjs
+        .send(
+          "service_vfcqsvr",
+          "template_yqly2d7",
+          {
+            user_name: formData.name,
+            user_email: formData.email,
+            message: formData.message,
+          },
+          "GOxvzU9_EUyp8rZFS"
+        )
         .then((response) => {
           console.log("Success", response.status, response.text);
           toast.success("Message sent successfully");
@@ -52,7 +59,7 @@ const ContactForm = () => {
           toast.error("failed to send message , please try again later ");
         })
         .finally(() => {
-          isSending(false);
+          setIsSending(false);
         });
     }
   };
@@ -106,6 +113,7 @@ const ContactForm = () => {
             className="w-full appearance-none rounded-lg border
              border-slate-800 bg-transparent px-3 py-2 texxt-sm
               focus:border-gray-400 focus:outline-none"
+            rows={4}
           />
           {errors.message && (
             <p className="text-sm text-pink-700">{errors.message}</p>
